@@ -1,0 +1,104 @@
+/* App.css */
+
+/* Style for the entire app */
+.App {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+/* Style for the dotted line separator */
+.file-separator {
+    border-right: 1px dashed #ccc;
+    margin-right: 5px;
+    padding-right: 5px;
+  }
+  
+  /* Style for the file upload component */
+  .file-upload {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    cursor: pointer;
+  }
+  .uploaded-files{
+    padding-bottom: 1rem;
+  }
+  
+  /* Style for the search bar component */
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style for the results table component */
+  .results-table {
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th,
+  table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  /* Style for the pagination component */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+  }
+  
+  li {
+    margin: 0 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  li.active {
+    color: #007BFF;
+    text-decoration: underline;
+  }
+  
