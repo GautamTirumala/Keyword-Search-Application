@@ -1,7 +1,7 @@
 const XLSX = require('xlsx');
 const fs = require('fs');
 
-const inputFilePath = `./DSA Sheet.xlsx`; // Replace with your Excel file path
+const inputFilePath = `./uploads/1694249981717-DSA Sheet.xlsx`; // Replace with your Excel file path
 
 // Read the Excel file
 const workbook = XLSX.readFile(inputFilePath);

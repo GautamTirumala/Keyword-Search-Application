@@ -13,11 +13,13 @@ function App() {
   const handleFileUpload = (files) => {
     // Handle uploaded files and update state
     setUploadedFiles(files);
+    console.log(files)
   };
 
   const handleSearch = (results) => {
     // Handle search results and update state
     setSearchResults(results);
+    console.log(results);
     setCurrentPage(1); // Reset to the first page of results
   };
 
@@ -31,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Document Search App</h1>
+      <h1>Keyword-Search-Application</h1>
       <FileUpload onUpload={handleFileUpload} />
       <SearchBar onSearch={handleSearch} />
       <ResultsTable results={currentResults} />
