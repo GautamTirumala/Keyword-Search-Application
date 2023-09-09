@@ -2,8 +2,8 @@ const mammoth = require('mammoth');
 const fs = require('fs');
 const colors = require('ansi-colors'); // For text highlighting
 
-const inputFilePath = `./side paper.docx`; // Replace with your Word document file path
-const searchWord = 'insert'; // Replace with the word you want to search for
+const inputFilePath = `./uploads/1694249998653-CRA.docx`; // Replace with your Word document file path
+const searchWord = 'A +'; // Replace with the word you want to search for
 
 // Read the Word document
 fs.readFile(inputFilePath, (err, data) => {
@@ -17,6 +17,7 @@ fs.readFile(inputFilePath, (err, data) => {
     .then((result) => {
       // The extracted content as plain text
       const plainText = result.value;
+      console.log(plainText);
 
       // Split the plain text into lines
       const lines = plainText.split('.');
