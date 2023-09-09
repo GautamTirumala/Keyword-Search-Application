@@ -6,7 +6,7 @@ function SearchBar({ onSearch }) {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`/api/search?q=${query}`);
+      const response = await axios.get(`http://localhost:5000/api/search?q=${query}`);
       onSearch(response.data);
     } catch (error) {
       console.error(error);

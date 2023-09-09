@@ -4,7 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const uploadDir = 'uploads';
 const app = express();
-const port = 5000;
+const port = 5002;
 
 
 app.use(cors());

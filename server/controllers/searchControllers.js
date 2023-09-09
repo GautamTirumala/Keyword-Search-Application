@@ -24,6 +24,7 @@ async function searchKeywordInPDF(pdfBuffer, keyword) {
 
 // Function to search keyword in Excel document
 function searchKeywordInExcel(excelBuffer, keyword) {
+  const XLSX = require('xlsx'); // Import the XLSX library if not already imported
   const workbook = XLSX.read(excelBuffer, { type: 'buffer' });
   const results = [];
 
@@ -32,20 +33,28 @@ function searchKeywordInExcel(excelBuffer, keyword) {
     const sheetData = XLSX.utils.sheet_to_json(worksheet);
 
     sheetData.forEach((row, rowIndex) => {
+      let found = false;
       for (const key in row) {
         const cellValue = row[key];
         if (cellValue && cellValue.toString().toLowerCase().includes(keyword.toLowerCase())) {
-          results.push({
-            documentName: 'Your Excel Document', // Replace with actual document name
-            sentence: `Sheet: ${sheetName}, Row: ${rowIndex + 1}, Column: ${key}`,
-          });
+          found = true;
+          break; // No need to check other cells in the same row
         }
+      }
+      if (found) {
+        results.push({
+          documentName: 'Your Excel Document', // Replace with actual document name
+          sheetName: sheetName,
+          rowIndex: rowIndex + 1, // Adding 1 to match the row index in Excel
+          rowData: row,
+        });
       }
     });
   });
 
   return results;
 }
+
 
 // Function to search keyword in Word document (docx)
 async function searchKeywordInWord(docxBuffer, keyword) {
