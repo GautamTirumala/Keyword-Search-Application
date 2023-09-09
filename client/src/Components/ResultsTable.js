@@ -33,5 +33,4 @@ function ResultsTable({ results }) {
     </div>
   );
 }
-
 export default ResultsTable;
