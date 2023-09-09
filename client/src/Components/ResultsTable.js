@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ResultsTable({ results }) {
+  console.log(results)
   return (
     <div className="results-table">
       <table>
@@ -13,9 +14,17 @@ function ResultsTable({ results }) {
         <tbody>
           {results.map((result, index) => (
             <tr key={index}>
-              <td>{result.documentName}</td>
+              <td style={{color:"black"}}>{result.fileName} </td>
               <td>
-                {result.sentenceWithHighlight} {/* Use CSS for highlighting */}
+              {Array.isArray(result.results) ? (
+                  <ul>
+                    {result.results.map((item, itemIndex) => (
+                      <li key={itemIndex}>{item.rowData.__EMPTY}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  result.results
+                )}
               </td>
             </tr>
           ))}
