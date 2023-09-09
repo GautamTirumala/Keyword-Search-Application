@@ -3,10 +3,11 @@ const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
 const uploadDir = 'uploads';
+const path = require('path');
 const app = express();
 const port = 5000;
 
-const { searchKeywordInPDF, searchKeywordInExcel, searchKeywordInWord } = require('./controllers/searchController'); // Import the search functions
+const { searchKeywordInPDF, searchKeywordInExcel, searchKeywordInWord } = require('./controllers/searchControllers'); // Import the search functions
 
 app.use(cors());
 
@@ -28,9 +29,56 @@ app.post('/api/upload', upload.array('files'), (req, res) => {
   res.status(200).json({ message: 'Files uploaded successfully' });
 });
 
+app.get('/api/search', async (req, res) => {
+  try {
+    const keyword = "Missing number";
+    const uploadPath = path.join(__dirname, uploadDir); // Get the absolute path to the 'uploads' directory
+
+    // Read the list of files in the 'uploads' directory
+    fs.readdir(uploadPath, async (err, files) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'An error occurred while listing files' });
+      }
+
+      const searchResults = [];
+
+      // Loop through each file and search for the keyword
+      for (const file of files) {
+        const filePath = path.join(uploadPath, file);
+        const fileBuffer = fs.readFileSync(filePath);
+
+        // Determine the file type based on the file extension
+        const fileType = path.extname(file).toLowerCase();
+
+        // Perform search based on file type
+        let results = [];
+        if (fileType === '.pdf') {
+          results = await searchKeywordInPDF(fileBuffer, keyword);
+        } else if (fileType === '.xlsx') {
+          results = await searchKeywordInExcel(fileBuffer, keyword);
+        } else if (fileType === '.docx') {
+          results = await searchKeywordInWord(fileBuffer, keyword);
+        }
+
+        // Add the search results to the combined results array
+        searchResults.push({
+          fileName: file,
+          fileType: fileType,
+          results: results,
+        });
+      }
+
+      res.json(searchResults);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while searching' });
+  }
+});
+
 app.post('/api/search', async (req, res) => {
   const { documentType, keyword } = req.body;
-  
   // Check if the uploaded files are in the 'uploads' directory and select the appropriate search function
   try {
     if (documentType === 'pdf') {

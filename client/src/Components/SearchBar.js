@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function SearchBar({ onSearch }) {
+
   const [query, setQuery] = useState('');
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`/api/search?q=${query}`);
+      const response = await axios.get(`http://localhost:5000/api/search/${query}`);
+      console.log(response)
       onSearch(response.data);
     } catch (error) {
       console.error(error);
