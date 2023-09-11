@@ -7,8 +7,10 @@ function SearchBar({ onSearch }) {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/search/${query}`);
-      console.log(response)
+      if(query === '') return alert('Enter Keyword(s) to SEARCH')
+      const response = await axios.post(`http://localhost:5000/api/search`, { keyword: query });
+    if(response.data === 'No files uploaded') return alert('Upload some pdf word excel files to search keyword')
+    console.log('response',response);
       onSearch(response.data);
     } catch (error) {
       console.error(error);

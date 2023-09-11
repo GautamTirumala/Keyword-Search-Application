@@ -20,7 +20,7 @@ function FileUpload() {
       },
     })
     .then((res) => {
-      console.log(res.data);
+      console.log('result in appi/upload',res.data);
     })
     .catch((error) => {
       console.error('Error uploading files:', error);

@@ -13,7 +13,7 @@ async function searchKeywordInPDF(pdfBuffer, keyword) {
   sentences.forEach((sentence, index) => {
     if (sentence.toLowerCase().includes(keyword.toLowerCase())) {
       results.push({
-        documentName: 'Your PDF Document', // Replace with actual document name
+        // documentName: 'Your PDF Document', // Replace with actual document name
         sentence: sentence.trim(),
       });
     }
