@@ -1,7 +1,25 @@
 import React from 'react';
 
-function ResultsTable({ results }) {
-  console.log(results)
+function ResultsTable({ results, query }) {
+  console.log('query', query);
+
+  const highlightWords = (sentence) => {
+    // Use a regular expression to match the query word(s) globally and case-insensitively
+    const regex = new RegExp(`\\b(${query.replace(/\s+/g, '|')})\\b`, 'gi');
+
+    // Split the sentence into an array of words and highlight the matching ones
+    const words = sentence.split(' ').map((word) => {
+      if (regex.test(word)) {
+        // Apply inline styles for highlighting
+        return `<span style="background-color: yellow; font-weight: bold;">${word}</span>`;
+      }
+      return word;
+    });
+
+    // Join the words back into a sentence with HTML
+    return words.join(' ');
+  };
+
   return (
     <div className="results-table">
       <table>
@@ -13,24 +31,38 @@ function ResultsTable({ results }) {
         </thead>
         <tbody>
           {results.map((result, index) => (
-            <tr key={index}>
-              <td style={{color:"black"}}>{result.fileName} </td>
-              <td>
-              {Array.isArray(result.results) ? (
-                  <ul>
-                    {result.results.map((item, itemIndex) => (
-                      <li key={itemIndex}>{item.rowData.__EMPTY}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  result.results
-                )}
-              </td>
-            </tr>
+            <React.Fragment key={index}>
+              {result.fileType === ".xlsx" ? (
+                // Special handling for XLSX files
+                result.results.map((item, itemIndex) => (
+                  <tr key={itemIndex}>
+                    {itemIndex === 0 ? (
+                      <td rowSpan={result.results.length} style={{ color: "black" }}>
+                        {result.fileName}
+                      </td>
+                    ) : null}
+                    <td dangerouslySetInnerHTML={{ __html: highlightWords(item.rowData.__EMPTY) }} />
+                  </tr>
+                ))
+              ) : (
+                // Default handling for other file types
+                result.results.map((item, itemIndex) => (
+                  <tr key={itemIndex}>
+                    {itemIndex === 0 ? (
+                      <td rowSpan={result.results.length} style={{ color: "black" }}>
+                        {result.fileName}
+                      </td>
+                    ) : null}
+                    <td dangerouslySetInnerHTML={{ __html: highlightWords(item.sentence) }} />
+                  </tr>
+                ))
+              )}
+            </React.Fragment>
           ))}
         </tbody>
       </table>
     </div>
   );
 }
+
 export default ResultsTable;

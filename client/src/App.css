@@ -101,4 +101,10 @@
     color: #007BFF;
     text-decoration: underline;
   }
+
+/* highlite keyword in result table */
+.highlighted {
+  background-color: yellow;
+  font-weight: bold; 
+}
   
