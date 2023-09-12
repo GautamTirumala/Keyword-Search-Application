@@ -1,78 +1,76 @@
 # Keyword-Search-Application
 
-**Overview:**
+### Overview :
 This is a single-page web application that allows users to upload PDF, Excel, and Word files,
 and then search for specific keywords within those files. The application will extract and
 display sentences containing the keyword(s) along with the document's name in a table format.
 
-#### Table of Contents
+### Table of Contents
 
-- [Functionalities](#functionalities)
-  - [User Interface](#user-interface)
-  - [Search Functionality](#search-functionality)
-  - [Result Presentation](#result-presentation)
-  - [Error Handling](#error-handling)
-- [Example](#example)
-- [Installation](#installation)
-  - [Download or Clone the Project](#download-or-clone-the-project)
-  - [How to Setup](#how-to-setup)
-    - [Client Installation](#client-installation)
-    - [Server Installation](#server-installation)
+- [Keyword-Search-Application](#keyword-search-application)
+    - [Overview :](#overview-)
+    - [Table of Contents](#table-of-contents)
+  - [Functionalities:](#functionalities)
+    - [1. User Interface:](#1-user-interface)
+    - [2. Search Functionality:](#2-search-functionality)
+    - [3. Result Presentation:](#3-result-presentation)
+    - [4. Error Handling:](#4-error-handling)
+  - [Example:](#example)
+  - [Installation](#installation)
+      - [How to Setup](#how-to-setup)
   - [How to Run](#how-to-run)
-    - [Client](#client)
-    - [Server](#server)
-- [API Documentation](#api-documentation)
+  - [API Documentation](#api-documentation)
   - [Base URL](#base-url)
   - [Endpoints](#endpoints)
     - [Upload Files](#upload-files)
     - [Clean Up Files](#clean-up-files)
     - [Search for Keyword](#search-for-keyword)
-- [Deployment](#deployment)
-  - [Deploying the Node.js Server](#deploying-the-nodejs-server)
-  - [Deploying the React Client](#deploying-the-react-client)
 
 
 
 
 
 
-**Functionalities:**
+## Functionalities:
 
-1. **User Interface:**
+### 1. User Interface:
 - A user-friendly single-page web application.
 - An upload feature that accepts PDF, Excel, and Word files.
 - Includes a search bar where users can enter one or more keywords.
 - Displays the results in a table format on the same page.
   
-2. **Search Functionality:**
+### 2. Search Functionality:
 - Allows users to enter one or more keywords in the search bar.
 - Performes a case-insensitive search for keywords in the text content of uploaded documents.
 - Identifies and extract sentences containing the keyword(s).
   
-4. **Result Presentation:**
+### 3. Result Presentation:
 - Displays the sentences containing the keyword(s) along with the name of the document in a
 table format.
 - Highlights the keyword(s) within the displayed sentences for easy identification.
   
-5. **Error Handling:**
+### 4. Error Handling:
 - Implements error handling and provides informative error messages for common issues, such
 as invalid file formats.
 
 
-**Example:**
+## Example:
 Let's say a user visits the application and uploads three files: "Document1.pdf,"
 "Spreadsheet.xlsx," and "TextDocument.docx." They then enter the keyword "project" into the
 search bar. The application processes the files and displays the following table:
-| Document Name       | Sentence                                                           |
-|---------------------|-------------------------------------------------------------------|
-| Document1.pdf       | "The project team has been working diligently on the project plan." |
-| Spreadsheet.xlsx    | "The project budget spreadsheet needs to be updated."              |
-| TextDocument.docx   | "The project timeline has been revised due to unexpected delays in the project schedule."                                               
+| Document Name    | Sentence                                                                                         |
+|------------------|-------------------------------------------------------------------------------------------------|
+| Document1.pdf    | "The project team has been working diligently on the project plan."                                |
+| Spreadsheet.xlsx | "The project budget spreadsheet needs to be updated."                                             |
+| TextDocument.docx| "The project timeline has been revised due to unexpected delays in the project schedule."       |
+                                            
 
 The table lists all the sentences containing the keyword "project" along with the respective
 document names.
 
 ## Installation
+
+#### How to Setup
 
 To set up the Keyword-Search-Application on your local system, follow these steps:
 
@@ -95,7 +93,6 @@ To set up the Keyword-Search-Application on your local system, follow these step
 
 </details>
 
-#### How to Setup
 
 To install the necessary dependencies for both the "client" and "server" components, follow these steps:
 
@@ -206,9 +203,9 @@ The Keyword Search Application provides API endpoints for uploading files, searc
         - `fileType`: The file type (e.g., "pdf").
         - `results`: An array of search results within the file.
 
-## Deployment
+### Deployment
 
-## Deploying the Node.js Server
+### Deploying the Node.js Server
 
 To deploy the Node.js server of the Keyword-Search-Application, follow these steps:
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/outline';
+// import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/outline';
 
 
 
