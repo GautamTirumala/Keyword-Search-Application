@@ -1,6 +1,25 @@
 import React from 'react';
 
-function ResultsTable({ results }) {
+function ResultsTable({ results, query }) {
+  console.log('query', query);
+
+  const highlightWords = (sentence) => {
+    // Use a regular expression to match the query word(s) globally and case-insensitively
+    const regex = new RegExp(`\\b(${query.replace(/\s+/g, '|')})\\b`, 'gi');
+
+    // Split the sentence into an array of words and highlight the matching ones
+    const words = sentence.split(' ').map((word) => {
+      if (regex.test(word)) {
+        // Apply inline styles for highlighting
+        return `<span style="background-color: yellow; font-weight: bold;">${word}</span>`;
+      }
+      return word;
+    });
+
+    // Join the words back into a sentence with HTML
+    return words.join(' ');
+  };
+
   return (
     <div className="results-table">
       <table>
@@ -22,7 +41,7 @@ function ResultsTable({ results }) {
                         {result.fileName}
                       </td>
                     ) : null}
-                    <td>{item.rowData.__EMPTY}</td>
+                    <td dangerouslySetInnerHTML={{ __html: highlightWords(item.rowData.__EMPTY) }} />
                   </tr>
                 ))
               ) : (
@@ -34,7 +53,7 @@ function ResultsTable({ results }) {
                         {result.fileName}
                       </td>
                     ) : null}
-                    <td>{item.sentence}</td>
+                    <td dangerouslySetInnerHTML={{ __html: highlightWords(item.sentence) }} />
                   </tr>
                 ))
               )}

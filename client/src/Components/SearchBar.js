@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch,setKeyword }) {
 
   const [query, setQuery] = useState('');
 
@@ -12,6 +12,7 @@ function SearchBar({ onSearch }) {
     if(response.data === 'No files uploaded') return alert('Upload some pdf word excel files to search keyword')
     console.log('response',response);
       onSearch(response.data);
+      setKeyword(query);
     } catch (error) {
       console.error(error);
     }

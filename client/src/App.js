@@ -6,6 +6,7 @@ import SearchBar from './Components/SearchBar';
 import ResultsTable from './Components/ResultsTable';
 
 function App() {
+  const [query, setQuery] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +21,10 @@ function App() {
       window.removeEventListener('beforeunload', handleUnload);
     };
   }, []);
+
+  const handleQueryChange = (newQuery) => {
+    setQuery(newQuery);
+  };
 
   const handleUnload = async () => {
     try {
@@ -54,8 +59,8 @@ function App() {
     <div className="App">
       <h1>Keyword-Search-Application</h1>
       <FileUpload onUpload={handleFileUpload} />
-      <SearchBar onSearch={handleSearch} />
-      <ResultsTable results={currentResults} />
+      <SearchBar onSearch={handleSearch} setKeyword={handleQueryChange}/>
+      <ResultsTable results={currentResults} query={query} />
       <div className="pagination">
         {searchResults.length > resultsPerPage && (
           <ul>
