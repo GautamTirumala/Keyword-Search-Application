@@ -11,6 +11,7 @@
     font-size: 24px;
     margin-bottom: 20px;
   }
+  
 
 /* Style for the dotted line separator */
 .file-separator {
@@ -24,9 +25,11 @@
     border: 2px dashed #ccc;
     padding: 20px;
     cursor: pointer;
+    width: 50rem;
   }
   .uploaded-files{
     padding-bottom: 1rem;
+  
   }
   
   /* Style for the search bar component */
