@@ -1,9 +1,7 @@
 # Keyword-Search-Application
 
 ### Overview :
-This is a single-page web application that allows users to upload PDF, Excel, and Word files,
-and then search for specific keywords within those files. The application will extract and
-display sentences containing the keyword(s) along with the document's name in a table format.
+This is a single-page web application that allows users to upload PDF, Excel, and Word files, and then search for specific keywords within those files. The application will extract and display sentences containing the keyword(s) along with the document's name in a table format. Additionally, to ensure data privacy, all uploaded files are automatically deleted when the user's session ends or on page reload.
 
 ### Table of Contents
 

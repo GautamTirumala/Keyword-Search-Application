@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import './App.css'
-import axios from 'axios';
-import FileUpload from './Components/FileUpload';
-import SearchBar from './Components/SearchBar';
-import ResultsTable from './Components/ResultsTable';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import axios from "axios";
+import FileUpload from "./Components/FileUpload";
+import SearchBar from "./Components/SearchBar";
+import ResultsTable from "./Components/ResultsTable";
 
 function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,11 +14,11 @@ function App() {
 
   useEffect(() => {
     // Attach an event listener to the window's beforeunload event to delete the uploads folder in the backend
-    window.addEventListener('beforeunload', handleUnload);
+    window.addEventListener("beforeunload", handleUnload);
 
     // Cleanup function to remove the event listener
     return () => {
-      window.removeEventListener('beforeunload', handleUnload);
+      window.removeEventListener("beforeunload", handleUnload);
     };
   }, []);
 
@@ -29,13 +29,11 @@ function App() {
   const handleUnload = async () => {
     try {
       // Send an HTTP request to your server to trigger the cleanup
-      await axios.delete('http://localhost:5000/api/cleanup'); // API endpoint to delete uploads folder
+      await axios.delete("http://localhost:5000/api/cleanup"); // API endpoint to delete uploads folder
     } catch (error) {
-      console.error('Error during cleanup:', error);
+      console.error("Error during cleanup:", error);
     }
   };
-
- 
 
   const handleFileUpload = (files) => {
     setUploadedFiles(files);
@@ -43,7 +41,7 @@ function App() {
 
   const handleSearch = (results) => {
     setSearchResults(results);
-    console.log('searchResults from app' ,searchResults);
+    console.log("searchResults from app", searchResults);
     setCurrentPage(1); // Reset to the first page of results
   };
 
@@ -53,19 +51,28 @@ function App() {
 
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-  const currentResults = searchResults.slice(indexOfFirstResult, indexOfLastResult);
+  const currentResults = searchResults.slice(
+    indexOfFirstResult,
+    indexOfLastResult
+  );
 
   return (
     <div className="App">
       <h1>Keyword-Search-Application</h1>
       <FileUpload onUpload={handleFileUpload} />
-      <SearchBar onSearch={handleSearch} setKeyword={handleQueryChange}/>
+      <SearchBar onSearch={handleSearch} setKeyword={handleQueryChange} />
       <ResultsTable results={currentResults} query={query} />
       <div className="pagination">
         {searchResults.length > resultsPerPage && (
           <ul>
-            {Array.from({ length: Math.ceil(searchResults.length / resultsPerPage) }).map((_, index) => (
-              <li key={index} onClick={() => paginate(index + 1)} className={currentPage === index + 1 ? 'active' : ''}>
+            {Array.from({
+              length: Math.ceil(searchResults.length / resultsPerPage),
+            }).map((_, index) => (
+              <li
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={currentPage === index + 1 ? "active" : ""}
+              >
                 {index + 1}
               </li>
             ))}

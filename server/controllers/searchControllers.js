@@ -1,16 +1,17 @@
-// controllers/searchController.js
+const pdf = require("pdf-parse");
+const XLSX = require("xlsx");
+const mammoth = require("mammoth");
 
-const pdf = require('pdf-parse');
-const XLSX = require('xlsx');
-const mammoth = require('mammoth');
-
-// Function to search keyword in PDF document
+// Function to search a keyword in a PDF document
 async function searchKeywordInPDF(pdfBuffer, keyword) {
+  // Parse the PDF document into text
   const data = await pdf(pdfBuffer);
-  const sentences = data.text.split(/[.!?]/); // Split text into sentences
+  // Split text into sentences using common sentence-ending punctuation
+  const sentences = data.text.split(/[.!?]/);
 
   const results = [];
   sentences.forEach((sentence, index) => {
+    // Check if the sentence contains the keyword (case-insensitive)
     if (sentence.toLowerCase().includes(keyword.toLowerCase())) {
       results.push({
         // documentName: 'Your PDF Document', // Replace with actual document name
@@ -22,10 +23,10 @@ async function searchKeywordInPDF(pdfBuffer, keyword) {
   return results;
 }
 
-// Function to search keyword in Excel document
+// Function to search a keyword in an Excel document
 function searchKeywordInExcel(excelBuffer, keyword) {
-  const XLSX = require('xlsx'); // Import the XLSX library if not already imported
-  const workbook = XLSX.read(excelBuffer, { type: 'buffer' });
+  // Parse the Excel document from the buffer
+  const workbook = XLSX.read(excelBuffer, { type: "buffer" });
   const results = [];
 
   workbook.SheetNames.forEach((sheetName) => {
@@ -36,14 +37,17 @@ function searchKeywordInExcel(excelBuffer, keyword) {
       let found = false;
       for (const key in row) {
         const cellValue = row[key];
-        if (cellValue && cellValue.toString().toLowerCase().includes(keyword.toLowerCase())) {
+        if (
+          cellValue &&
+          cellValue.toString().toLowerCase().includes(keyword.toLowerCase())
+        ) {
           found = true;
           break; // No need to check other cells in the same row
         }
       }
       if (found) {
         results.push({
-          documentName: 'Your Excel Document', // Replace with actual document name
+          // documentName: 'Your Excel Document', // Replace with actual document name
           sheetName: sheetName,
           rowIndex: rowIndex + 1, // Adding 1 to match the row index in Excel
           rowData: row,
@@ -55,18 +59,19 @@ function searchKeywordInExcel(excelBuffer, keyword) {
   return results;
 }
 
-
-// Function to search keyword in Word document (docx)
+// Function to search a keyword in a Word document (docx)
 async function searchKeywordInWord(docxBuffer, keyword) {
+  // Extract raw text from the Word document
   const { value } = await mammoth.extractRawText({ buffer: docxBuffer });
-
-  const sentences = value.split(/[.!?]/); // Split text into sentences
+  // Split text into sentences using common sentence-ending punctuation
+  const sentences = value.split(/[.!?]/);
 
   const results = [];
   sentences.forEach((sentence, index) => {
+    // Check if the sentence contains the keyword (case-insensitive)
     if (sentence.toLowerCase().includes(keyword.toLowerCase())) {
       results.push({
-        documentName: 'Your Word Document', // Replace with actual document name
+        // documentName: 'Your Word Document', // Replace with actual document name
         sentence: sentence.trim(),
       });
     }
@@ -76,7 +81,6 @@ async function searchKeywordInWord(docxBuffer, keyword) {
 }
 
 // Export these functions to be used in your route handler
-
 module.exports = {
   searchKeywordInPDF,
   searchKeywordInExcel,
