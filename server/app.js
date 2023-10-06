@@ -5,7 +5,7 @@ const fs = require("fs");
 const uploadDir = "uploads";
 const path = require("path");
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Import the search functions from the controller
 const {
@@ -122,6 +122,6 @@ app.post("/api/search", async (req, res) => {
 });
 
 // Start the Express.js server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

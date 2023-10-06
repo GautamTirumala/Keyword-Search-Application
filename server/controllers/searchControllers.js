@@ -6,13 +6,13 @@ const mammoth = require("mammoth");
 async function searchKeywordInPDF(pdfBuffer, keyword) {
   // Parse the PDF document into text
   const data = await pdf(pdfBuffer);
-  // Split text into sentences using common sentence-ending punctuation
-  const sentences = data.text.split(/[.!?]/);
+  // Split text into sentences string array using common sentence-ending punctuation
+  const sentences = data.text.split(/[.!?]/); // Regular Expression
 
   const results = [];
   sentences.forEach((sentence, index) => {
     // Check if the sentence contains the keyword (case-insensitive)
-    if (sentence.toLowerCase().includes(keyword.toLowerCase())) {
+    if (sentence.toLowerCase().includes(keyword.toLowerCase())) { //can improve efficiency by using toLowerCase only one time
       results.push({
         // documentName: 'Your PDF Document', // Replace with actual document name
         sentence: sentence.trim(),
