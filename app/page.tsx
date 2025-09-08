@@ -137,48 +137,52 @@ export default function AmanMarketingLanding() {
             backgroundImage: `url('/powerful-lorry-truck-on-highway-at-dusk.jpg')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-transparent to-secondary/80" />
+        <div className="absolute inset-0 bg-black/60" />
 
         <motion.div
-          className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
+          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-          >
-            Aman Marketing: Powering Your Fleet with Premium Brake Pads & Filters
-          </motion.h1>
-
-          <motion.p
-            className="text-lg md:text-xl lg:text-2xl mb-8 text-pretty opacity-90"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.9 }}
-          >
-            Distributors of durable, high-performance parts for lorry trucks—ensuring safety and efficiency on every
-            mile.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-          >
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105 active:scale-95"
-              onClick={scrollToProducts}
+          <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <motion.h1
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance text-white"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.7 }}
+              style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.9)" }}
             >
-              <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                Explore Our Products
-              </motion.span>
-            </Button>
-          </motion.div>
+              Aman Marketing: Powering Your Fleet with Premium Brake Pads & Filters
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl mb-8 text-pretty text-white/90"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.9 }}
+              style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.8)" }}
+            >
+              Distributors of durable, high-performance parts for lorry trucks—ensuring safety and efficiency on every
+              mile.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+            >
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105 active:scale-95"
+                onClick={scrollToProducts}
+              >
+                <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  Explore Our Products
+                </motion.span>
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Animated scroll indicator */}
